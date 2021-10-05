@@ -1,0 +1,125 @@
+<div class="ui hidden divider"></div>
+<div class="ui container">
+  <h1 class="ui center aligned massive header">Reactive Form</h1>
+  <form
+    class="ui very padded raised segment form"
+    [formGroup]="featureForm"
+    (ngSubmit)="onSubmitted()"
+  >
+    <div class="field">
+      <label>First Name</label>
+      <input
+        class="form-control"
+        type="text"
+        id="firstName"
+        name="firstName"
+        placeholder="First Name"
+        formControlName="firstName"
+      />
+      <div *ngIf="submitted && first.firstName.errors">
+        <div *ngIf="first.firstName.errors.required">
+          First Name is required
+        </div>
+      </div>
+      <!-- <span *ngIf="firstName.">Please enter a valid email</span> -->
+    </div>
+    <div class="field">
+      <label>Last Name</label>
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        placeholder="Last Name"
+        formControlName="lastName"
+      />
+      <div *ngIf="submitted && first.lastName.errors">
+        <div *ngIf="first.lastName.errors.required">Last Name is required</div>
+      </div>
+    </div>
+    <div class="field">
+      <label for="email">email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="Email"
+        formControlName="email"
+      />
+      <div *ngIf="submitted && first.email.errors">
+        <div *ngIf="first.email.errors.required">Email is required</div>
+        <div *ngIf="first.email.errors.email">
+          Email must be a valid email address
+        </div>
+      </div>
+      <!-- <span *ngIf="!featureForm" class="error message">Please enter a valid email</span> -->
+    </div>
+    <div class="field">
+      <label>Password</label>
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+      <div *ngIf="submitted && first.password.errors">
+        <div *ngIf="first.password.errors.required">Password is required</div>
+        <div *ngIf="first.password.errors.minlength">
+          Password must be at least 6 characters
+        </div>
+        <div *ngIf="first.password.errors.pattern">
+          Password should contain at least 1 uppercase, 1 figure and 1 special
+          character
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Phone Number</label>
+      <input
+        type="number"
+        id="phoneNumber"
+        name="phoneNumber"
+        placeholder="Phone Number"
+        formControlName="phoneNumber"
+      />
+    </div>
+    <div class="field">
+      <label>Country</label>
+      <fui-select formControlName="country" class="ui fluid dropdown selection">
+        <fui-select-option
+          *ngFor="let country of countriesData"
+          [value]="country.name"
+          >{{ country.name }}
+        </fui-select-option>
+      </fui-select>
+    </div>
+    <div class="field">
+      <label>Occupation</label>
+      <fui-select
+        formControlName="occupation"
+        class="ui fluid dropdown selection"
+      >
+        <fui-select-option
+          *ngFor="let occupation of occupations"
+          [value]="occupation"
+          >{{ occupation }}
+        </fui-select-option>
+      </fui-select>
+    </div>
+
+    <div class="grouped fields">
+      <label>Successful:</label>
+      <div class="field" *ngFor="let success of successes">
+        <fui-radio-button
+          formControlName="successful"
+          name="choose"
+          [value]="success"
+          >{{ success }}</fui-radio-button
+        >
+      </div>
+
+      <button class="ui secondary button" type="submit">submit</button>
+    </div>
+  </form>
+</div>
+<div class="ui hidden divider"></div>
